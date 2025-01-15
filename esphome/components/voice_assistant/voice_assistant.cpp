@@ -639,6 +639,8 @@ void VoiceAssistant::signal_stop_() {
 
 void VoiceAssistant::on_event(const api::VoiceAssistantEventResponse &msg) {
   ESP_LOGD(TAG, "Event Type: %" PRId32, msg.event_type);
+  // Log the value of api::enums::VOICE_ASSISTANT_TTS_STREAM_START
+  ESP_LOGD(TAG, "api::enums::VOICE_ASSISTANT_TTS_STREAM_START: %" PRId32, api::enums::VOICE_ASSISTANT_TTS_STREAM_START);
   switch (msg.event_type) {
     case api::enums::VOICE_ASSISTANT_RUN_START:
       ESP_LOGD(TAG, "Assist Pipeline running");
@@ -782,6 +784,7 @@ void VoiceAssistant::on_event(const api::VoiceAssistantEventResponse &msg) {
       break;
     }
     case api::enums::VOICE_ASSISTANT_TTS_STREAM_START: {
+      ESP_LOGD(TAG, "CASE: api::enums::VOICE_ASSISTANT_TTS_STREAM_START");
 #ifdef USE_SPEAKER
       if (this->speaker_ != nullptr) {
         this->wait_for_stream_end_ = true;
